@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="@localhost">
+  <database-model serializer="dbm" dbms="MYSQL" family-id="MYSQL" format-version="4.49">
+    <root id="1">
+      <DefaultCasing>lower/lower</DefaultCasing>
+      <DefaultEngine>InnoDB</DefaultEngine>
+      <DefaultTmpEngine>InnoDB</DefaultTmpEngine>
+      <ServerVersion>5.7.28</ServerVersion>
+    </root>
+    <schema id="2" parent="1" name="comet">
+      <CollationName>utf8_general_ci</CollationName>
+    </schema>
+    <schema id="3" parent="1" name="db_ai_work">
+      <CollationName>utf8mb4_general_ci</CollationName>
+    </schema>
+    <schema id="4" parent="1" name="gva">
+      <CollationName>utf8mb4_general_ci</CollationName>
+    </schema>
+    <schema id="5" parent="1" name="information_schema">
+      <CollationName>utf8_general_ci</CollationName>
+    </schema>
+    <schema id="6" parent="1" name="mydb">
+      <CollationName>utf8_general_ci</CollationName>
+    </schema>
+    <schema id="7" parent="1" name="mysql">
+      <CollationName>utf8_general_ci</CollationName>
+    </schema>
+    <schema id="8" parent="1" name="performance_schema">
+      <CollationName>utf8_general_ci</CollationName>
+    </schema>
+    <schema id="9" parent="1" name="sys">
+      <CollationName>utf8_general_ci</CollationName>
+    </schema>
+    <schema id="10" parent="1" name="wobbs">
+      <CollationName>utf8mb4_general_ci</CollationName>
+    </schema>
+    <schema id="11" parent="1" name="staroj">
+      <IntrospectionTimestamp>2023-08-28.23:56:58</IntrospectionTimestamp>
+      <LocalIntrospectionTimestamp>2023-08-28.07:56:58</LocalIntrospectionTimestamp>
+      <CollationName>utf8_general_ci</CollationName>
+    </schema>
+  </database-model>
+</dataSource>
