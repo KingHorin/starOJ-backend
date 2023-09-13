@@ -14,7 +14,7 @@ func GetProblemList() gin.HandlerFunc {
 
 func GetProblem() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		p := c.Param("p")
-		c.JSON(http.StatusOK, gin.H{"code": p, "msg": "开发中"})
+		id := c.Param("id")
+		c.JSON(http.StatusOK, gin.H{"code": id, "msg": "开发中"})
 	}
 }

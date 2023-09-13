@@ -17,6 +17,7 @@ func InitRouter() *gin.Engine {
 
 	userGroup := r.Group("/user").Use(jwt.JwtMiddleware())
 	{
+		//userGroup.GET("/getProfile/:username", api.getProfile())
 		userGroup.POST("/postNickname", api.PostNickname())
 		userGroup.POST("/postAvatar", api.PostAvatar())
 		userGroup.POST("/postPhone", api.PostPhone())
@@ -26,7 +27,7 @@ func InitRouter() *gin.Engine {
 	problemGroup := r.Group("/problem")
 	{
 		problemGroup.GET("/list", api.GetProblemList())
-		problemGroup.GET("/:p", api.GetProblem())
+		problemGroup.GET("/:id", api.GetProblem())
 	}
 
 	return r
