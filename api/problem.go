@@ -13,10 +13,11 @@ func GetProblemList() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		const PAGESIZE = 20
 		type resp struct {
-			ID         int32  `json:"ID"`
-			Name       string `json:"name"`
-			Difficulty string `json:"difficulty"`
-			CreatedBy  int32  `json:"createdBy"`
+			ID         int32       `json:"ID"`
+			Name       string      `json:"name"`
+			Difficulty int32       `json:"difficulty"`
+			CreatedBy  int32       `json:"createdBy"`
+			Tags       []model.Tag `json:"tags" gorm:"many2many:problem_tag"`
 		}
 
 		page := c.Query("page")
@@ -29,9 +30,13 @@ func GetProblemList() gin.HandlerFunc {
 			return
 		}
 
-		var results []resp
+		var tmp []model.Problem
 		db := config.GetDB()
-		db.Model(model.Problem{}).Limit(PAGESIZE).Offset(PAGESIZE * pageNumber).Find(&results)
+		db.Model(model.Problem{}).Preload("Tags").Limit(PAGESIZE).Offset(PAGESIZE * pageNumber).Find(&tmp)
+		var results []resp
+		for i := 0; i < len(tmp); i++ {
+			results = append(results, resp{tmp[i].ID, tmp[i].Name, tmp[i].Difficulty, tmp[i].CreatedBy, tmp[i].Tags})
+		}
 		resultsJSON, _ := json.Marshal(results)
 		c.JSON(http.StatusOK, gin.H{"results": json.RawMessage(resultsJSON), "code": 200, "msg": "查询完成"})
 	}
@@ -39,20 +44,6 @@ func GetProblemList() gin.HandlerFunc {
 
 func GetProblem() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		type resp struct {
-			ID           int32  `json:"ID"`
-			Name         string `json:"name"`
-			TimeLimits   int32  `json:"timeLimits"`
-			MemoryLimits int32  `json:"memoryLimits"`
-			Description  string `json:"description"`
-			InputFormat  string `json:"inputFormat"`
-			OutputFormat string `json:"outputFormat"`
-			Note         string `json:"note"`
-			SPJ          bool   `json:"spj"`
-			CreatedBy    int32  `json:"createdBy"`
-			//Tags  []model.Tag `json:"Tags"`
-		}
-
 		id := c.Param("id")
 		idNumber, err := strconv.Atoi(id)
 		if err != nil || idNumber <= 0 {
@@ -60,9 +51,9 @@ func GetProblem() gin.HandlerFunc {
 			return
 		}
 
-		var results resp
+		var results model.Problem
 		db := config.GetDB()
-		if db.Model(model.Problem{}).Where("id = ?", idNumber).Take(&results).Error != nil {
+		if db.Preload("Tags").Where("id = ?", idNumber).Take(&results).Error != nil {
 			c.JSON(http.StatusOK, gin.H{"code": 0, "msg": "记录不存在"})
 			return
 		}

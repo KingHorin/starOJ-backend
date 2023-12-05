@@ -15,27 +15,21 @@ type Problem struct {
 	OutputFormat string         `gorm:"type:text;not null"`
 	Note         string         `gorm:"type:text;not null"`
 	SPJ          bool           `gorm:"type:tinyint;not null"`
-	TestCase     int32          `gorm:"type:int;not null"`
-	Difficulty   string         `gorm:"type:varchar(10);not null;index"`
+	TestCase     int32          `gorm:"type:int;not null" json:"-"`
+	Difficulty   int32          `gorm:"type:int;not null;index"`
 	CreatedBy    int32          `gorm:"type:int;not null"`
-	CreatedAt    time.Time      `gorm:"type:timestamp;autoCreateTime;not null"`
-	DeletedAt    gorm.DeletedAt `gorm:"type:timestamp;index"`
-	Tags         []Tag          `gorm:"many2many:problem_tag;"`
+	CreatedAt    time.Time      `gorm:"type:timestamp;autoCreateTime;not null" json:"-"`
+	DeletedAt    gorm.DeletedAt `gorm:"type:timestamp;index" json:"-"`
+	Tags         []Tag          `gorm:"many2many:problem_tag"`
 }
 
 type Tag struct {
-	ID       int32     `gorm:"type:int;primary_key;auto_increment"`
-	Name     string    `gorm:"type:varchar(50);not null;index"`
-	Color    string    `gorm:"type:char(7);not null"`
-	Problems []Problem `gorm:"many2many:problem_tag;"`
-}
-
-type ProblemTag struct {
-	ID        int32 `gorm:"type:int;primary_key;auto_increment"`
-	ProblemID int32 `gorm:"type:int;not null;index"`
-	TagID     int32 `gorm:"type:int;not null;index"`
+	ID    int32  `gorm:"type:int;primary_key;auto_increment"`
+	Name  string `gorm:"type:varchar(50);not null;index"`
+	Color string `gorm:"type:char(7);not null"`
 }
 
 func MigrateProblem(db *gorm.DB) {
-	db.AutoMigrate(&Problem{}, &Tag{}, &ProblemTag{})
+	db.AutoMigrate(&Problem{})
+	db.AutoMigrate(&Tag{})
 }
