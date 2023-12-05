@@ -4,14 +4,9 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e397eea3-c169-4cd2-830c-843b24986ea1" name="变更" comment="not much">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/auth.go" beforeDir="false" afterPath="$PROJECT_DIR$/api/auth.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/problem.go" beforeDir="false" afterPath="$PROJECT_DIR$/api/problem.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/database.go" beforeDir="false" afterPath="$PROJECT_DIR$/config/database.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/problem.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/problem.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/user.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/user.go" afterDir="false" />
+    <list default="true" id="e397eea3-c169-4cd2-830c-843b24986ea1" name="变更" comment="12.5 提交查询">
+      <change beforePath="$PROJECT_DIR$/model/sheet.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/sheet.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/submission.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/submission.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/router/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/router/router.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -29,6 +24,20 @@
   <component name="GOROOT" url="file://$USER_HOME$/go" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "KingHorin"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="29632498-115e-4b76-bf9c-0a618005736f" />
+        <option name="url" value="https://github.com/KingHorin/starOJ-backend" />
+      </UrlAndAccount>
+    </option>
   </component>
   <component name="GoLibraries">
     <option name="urls">
@@ -164,7 +173,10 @@
     <MESSAGE value="修正一些拼写问题" />
     <MESSAGE value="init" />
     <MESSAGE value="not much" />
-    <option name="LAST_COMMIT_MESSAGE" value="not much" />
+    <MESSAGE value="12.5" />
+    <MESSAGE value="12.5 题目查询" />
+    <MESSAGE value="12.5 提交查询" />
+    <option name="LAST_COMMIT_MESSAGE" value="12.5 提交查询" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>

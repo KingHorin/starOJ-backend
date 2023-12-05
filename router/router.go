@@ -43,5 +43,11 @@ func InitRouter() *gin.Engine {
 		submissionGroup.GET("/:id", api.GetSubmission())
 	}
 
+	sheetGroup := r.Group("/sheet")
+	{
+		sheetGroup.GET("/list", api.GetSheetList())
+		sheetGroup.GET("/:id", api.GetSheet())
+	}
+
 	return r
 }

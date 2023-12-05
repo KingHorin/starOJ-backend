@@ -9,7 +9,7 @@ import (
 	"strconv"
 )
 
-func GetProblemList() gin.HandlerFunc {
+func GetSheetList() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		const PAGESIZE = 20
 
@@ -23,15 +23,18 @@ func GetProblemList() gin.HandlerFunc {
 			return
 		}
 
-		var results []model.Problem
 		db := config.GetDB()
-		db.Model(model.Problem{}).Preload("Tags").Limit(PAGESIZE).Offset(PAGESIZE * pageNumber).Find(&results)
+		var results []model.Sheet
+		if db.Limit(PAGESIZE).Find(&results).Error != nil {
+			c.JSON(http.StatusOK, gin.H{"code": 200, "msg": "参数错误"})
+			return
+		}
 		resultsJSON, _ := json.Marshal(results)
 		c.JSON(http.StatusOK, gin.H{"results": json.RawMessage(resultsJSON), "code": 200, "msg": "查询完成"})
 	}
 }
 
-func GetProblem() gin.HandlerFunc {
+func GetSheet() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		id := c.Param("id")
 		idNumber, err := strconv.Atoi(id)
@@ -40,9 +43,9 @@ func GetProblem() gin.HandlerFunc {
 			return
 		}
 
-		var results model.Problem
+		var results model.Sheet
 		db := config.GetDB()
-		if db.Preload("Detail").Preload("Tags").Where("id = ?", idNumber).Take(&results).Error != nil {
+		if db.Preload("Problems").Preload("Problems.Tags").Where("id = ?", idNumber).Take(&results).Error != nil {
 			c.JSON(http.StatusOK, gin.H{"code": 0, "msg": "记录不存在"})
 			return
 		}
