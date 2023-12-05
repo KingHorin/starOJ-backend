@@ -13,7 +13,7 @@ type Submission struct {
 	Language  int32     `gorm:"type:int;not null"`
 	Time      int32     `gorm:"type:int;not null"`
 	Memory    int32     `gorm:"type:int;not null"`
-	JudgedAt  time.Time `gorm:"type:timestamp;not null"`
+	JudgedAt  time.Time `gorm:"type:timestamp;not null" json:"-"`
 	CreatedAt time.Time `gorm:"type:timestamp;autoCreateTime;not null"`
 }
 

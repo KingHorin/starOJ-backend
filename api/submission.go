@@ -7,19 +7,7 @@ import (
 	"starOJ-backend/config"
 	"starOJ-backend/model"
 	"strconv"
-	"time"
 )
-
-type resp struct {
-	ID        int32     `json:"ID"`
-	ProblemID int32     `json:"problemID"`
-	UserID    int32     `json:"userID"`
-	Status    int32     `json:"status"`
-	Language  int32     `json:"language"`
-	Time      int32     `json:"time"`
-	Memory    int32     `json:"memory"`
-	CreatedAt time.Time `json:"createdAt"`
-}
 
 func GetSubmissionList() gin.HandlerFunc {
 	return func(c *gin.Context) {
@@ -33,16 +21,20 @@ func GetSubmissionList() gin.HandlerFunc {
 
 		db := config.GetDB().Model(&model.Submission{})
 		if len(problemID) != 0 {
-			db = db.Where("problemid = ?", problemID)
+			problemIDNumber, _ := strconv.Atoi(problemID)
+			db = db.Where("problem_id = ?", problemIDNumber)
 		}
 		if len(userID) != 0 {
-			db = db.Where("userid = ?", userID)
+			userIDNumber, _ := strconv.Atoi(userID)
+			db = db.Where("user_id = ?", userIDNumber)
 		}
 		if len(status) != 0 {
-			db = db.Where("status = ?", status)
+			statusNumber, _ := strconv.Atoi(status)
+			db = db.Where("status = ?", statusNumber)
 		}
 		if len(language) != 0 {
-			db = db.Where("language = ?", language)
+			languageNumber, _ := strconv.Atoi(language)
+			db = db.Where("language = ?", languageNumber)
 		}
 		if len(page) != 0 {
 			pageNumber, err := strconv.Atoi(page)
@@ -57,7 +49,7 @@ func GetSubmissionList() gin.HandlerFunc {
 		}
 		db = db.Order("created_at desc")
 
-		var results []resp
+		var results []model.Submission
 		if db.Limit(PAGESIZE).Find(&results).Error != nil {
 			c.JSON(http.StatusOK, gin.H{"code": 200, "msg": "参数错误"})
 			return
@@ -76,9 +68,9 @@ func GetSubmission() gin.HandlerFunc {
 			return
 		}
 
-		var results resp
+		var results model.Submission
 		db := config.GetDB()
-		if db.Model(model.Submission{}).Where("id = ?", idNumber).Take(&results).Error != nil {
+		if db.Where("id = ?", idNumber).Take(&results).Error != nil {
 			c.JSON(http.StatusOK, gin.H{"code": 0, "msg": "记录不存在"})
 			return
 		}
