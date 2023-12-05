@@ -9,7 +9,7 @@ type User struct {
 	ID        int32          `gorm:"type:int;primary_key;auto_increment"`
 	Username  string         `gorm:"type:varchar(20);not null;index"`
 	Nickname  string         `gorm:"type:varchar(50);not null;index"`
-	Password  string         `gorm:"type:char(64);not null"`
+	Password  string         `gorm:"type:char(64);not null"` // 用了base64加密，长度都一样
 	Avatar    string         `gorm:"type:varchar(255);not null"`
 	Phone     string         `gorm:"type:varchar(20);not null"`
 	Email     string         `gorm:"type:varchar(50);not null"`

@@ -60,4 +60,7 @@ func init() {
 func initMigrate() {
 	model.MigrateUser(db)
 	model.MigrateProblem(db)
+	model.MigrateSubmission(db)
+	model.MigrateContest(db)
+	model.MigrateSheet(db)
 }

@@ -9,6 +9,13 @@ import (
 func InitRouter() *gin.Engine {
 	r := gin.Default()
 
+	indexGroup := r.Group("/index")
+	{
+		indexGroup.GET("/getDailyProblem", api.GetDailyProblem())
+		indexGroup.GET("/getUserSheet", api.GetUserSheet())
+		indexGroup.GET("/getRecentContest", api.GetRecentContest())
+	}
+
 	authGroup := r.Group("/auth")
 	{
 		authGroup.POST("/login", api.Login())
@@ -28,6 +35,12 @@ func InitRouter() *gin.Engine {
 	{
 		problemGroup.GET("/list", api.GetProblemList())
 		problemGroup.GET("/:id", api.GetProblem())
+	}
+
+	submissionGroup := r.Group("/submission")
+	{
+		submissionGroup.GET("/list", api.GetSubmissionList())
+		submissionGroup.GET("/:id", api.GetSubmission())
 	}
 
 	return r

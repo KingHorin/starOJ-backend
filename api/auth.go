@@ -32,7 +32,7 @@ func Login() gin.HandlerFunc {
 		} else if user.Password != HmacSha256.HmacSha256ToBase64(r.Password) {
 			c.JSON(http.StatusOK, gin.H{"code": 0, "msg": "密码错误"})
 		} else {
-			token, _ := jwt.GenerateToken(r.UserID, 2*time.Hour)
+			token, _ := jwt.GenerateToken(r.UserID, 7*time.Hour)
 			rd.HSet("token", strconv.FormatInt(r.UserID, 10), token)
 			c.JSON(http.StatusOK, gin.H{"code": 1, "msg": "登录成功", "token": token})
 		}
