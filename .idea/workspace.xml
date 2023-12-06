@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e397eea3-c169-4cd2-830c-843b24986ea1" name="变更" comment="12.5 提交查询">
-      <change beforePath="$PROJECT_DIR$/model/sheet.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/sheet.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/submission.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/submission.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/router/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/router/router.go" afterDir="false" />
-    </list>
+    <list default="true" id="e397eea3-c169-4cd2-830c-843b24986ea1" name="变更" comment="12.5 many fix" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -25,12 +21,12 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "KingHorin"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;KingHorin&quot;
   }
-}]]></component>
+}</component>
   <component name="GithubPullRequestsUISettings">
     <option name="selectedUrlAndAccountId">
       <UrlAndAccount>
@@ -176,7 +172,8 @@
     <MESSAGE value="12.5" />
     <MESSAGE value="12.5 题目查询" />
     <MESSAGE value="12.5 提交查询" />
-    <option name="LAST_COMMIT_MESSAGE" value="12.5 提交查询" />
+    <MESSAGE value="12.5 many fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="12.5 many fix" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>

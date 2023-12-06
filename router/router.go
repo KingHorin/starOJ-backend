@@ -43,6 +43,12 @@ func InitRouter() *gin.Engine {
 		submissionGroup.GET("/:id", api.GetSubmission())
 	}
 
+	contestGroup := r.Group("/contest")
+	{
+		contestGroup.GET("/list", api.GetContestList())
+		contestGroup.GET("/:id", api.GetContest())
+	}
+
 	sheetGroup := r.Group("/sheet")
 	{
 		sheetGroup.GET("/list", api.GetSheetList())
