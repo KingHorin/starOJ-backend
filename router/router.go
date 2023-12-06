@@ -22,13 +22,16 @@ func InitRouter() *gin.Engine {
 		authGroup.POST("/register", api.Register())
 	}
 
-	userGroup := r.Group("/user").Use(jwt.JwtMiddleware())
+	userGroup1 := r.Group("/user")
 	{
-		//userGroup.GET("/getProfile/:username", api.getProfile())
-		userGroup.POST("/postNickname", api.PostNickname())
-		userGroup.POST("/postAvatar", api.PostAvatar())
-		userGroup.POST("/postPhone", api.PostPhone())
-		userGroup.POST("/postEmail", api.PostEmail())
+		userGroup1.GET("/getInfo", api.GetInfo())
+	}
+	userGroup2 := r.Group("/user").Use(jwt.JwtMiddleware())
+	{
+		userGroup2.POST("/postNickname", api.PostNickname())
+		userGroup2.POST("/postAvatar", api.PostAvatar())
+		userGroup2.POST("/postPhone", api.PostPhone())
+		userGroup2.POST("/postEmail", api.PostEmail())
 	}
 
 	problemGroup := r.Group("/problem")

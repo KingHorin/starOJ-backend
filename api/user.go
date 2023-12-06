@@ -3,12 +3,39 @@ package api
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator/v10"
+	"github.com/goccy/go-json"
 	"github.com/nu7hatch/gouuid"
 	"net/http"
 	"path"
 	"starOJ-backend/config"
 	"starOJ-backend/model"
+	"strconv"
 )
+
+func GetInfo() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		type resp struct {
+			ID       int32  `json:"id"`
+			Nickname string `json:"nickname"`
+			Avatar   string `json:"avatar"`
+		}
+		id := c.Query("id")
+		idNumber, err := strconv.Atoi(id)
+		if err != nil || len(id) == 0 {
+			c.JSON(http.StatusOK, gin.H{"code": 0, "msg": "参数错误"})
+			return
+		}
+
+		var results resp
+		db := config.GetDB()
+		if db.Model(&model.User{}).Where("id = ?", idNumber).Take(&results).Error != nil {
+			c.JSON(http.StatusOK, gin.H{"code": 0, "msg": "参数错误"})
+			return
+		}
+		resultsJSON, _ := json.Marshal(results)
+		c.JSON(http.StatusOK, gin.H{"results": json.RawMessage(resultsJSON), "code": 1, "msg": "查询完成"})
+	}
+}
 
 func PostNickname() gin.HandlerFunc {
 	return func(c *gin.Context) {
@@ -36,6 +63,16 @@ func PostAvatar() gin.HandlerFunc {
 		file, err := c.FormFile("file")
 		if err != nil {
 			c.JSON(http.StatusOK, gin.H{"code": 0, "msg": "上传错误"})
+		}
+		extName := path.Ext(file.Filename) //获取后缀名
+		allowExtMap := map[string]bool{
+			".jpg":  true,
+			".png":  true,
+			".jpeg": true,
+		}
+		if _, ok := allowExtMap[extName]; !ok {
+			c.JSON(http.StatusOK, gin.H{"code": 0, "msg": "文件类型错误"})
+			return
 		}
 		filename, _ := uuid.NewV4()
 		dest := path.Join("./user/avatar", filename.String()+".jpg")
