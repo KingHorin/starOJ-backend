@@ -43,7 +43,7 @@ func GetContest() gin.HandlerFunc {
 			return
 		}
 
-		var results model.Sheet
+		var results model.Contest
 		db := config.GetDB()
 		if db.Preload("Problems").Where("id = ?", idNumber).Take(&results).Error != nil {
 			c.JSON(http.StatusOK, gin.H{"code": 0, "msg": "记录不存在"})
